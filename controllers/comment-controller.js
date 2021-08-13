@@ -8,7 +8,7 @@ const commentController = {
                 return Pizza.findOneAndUpdate(
                     { _id: params.pizzaId },
                     { $push: { comments: _id }},
-                    { nrew: true }
+                    { new: true, runValidators: true }
                 );
             })
             .then(dbPizzaData => {
@@ -25,7 +25,7 @@ const commentController = {
         Comment.findOneAndUpdate(
             { _id: params.commentId },
             { $push: {replies: body}}, //addToSet does the same but doesn't allow duplicates
-            { new: true }
+            { new: true, runValidators: true }
         )
         .then(dbPizzaData => {
             if(!dbPizzaData) return res.status(404).json({ message: 'no pizza with this id' });
